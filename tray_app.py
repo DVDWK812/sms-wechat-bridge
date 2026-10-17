@@ -49,7 +49,7 @@ ERROR_NAMES = {
 
 def acquire_instance():
     identity = win32api.GetUserName()
-    digest = hashlib.sha256((identity + str(PROJECT).casefold()).encode()).hexdigest()[:24]
+    digest = hashlib.sha256((identity + str(ROOT).casefold()).encode()).hexdigest()[:24]
     handle = win32event.CreateMutex(None, False, 'Local\\SmsWechatBridgeTray-' + digest)
     if win32event.WaitForSingleObject(handle, 0) not in (0, 128):
         handle.Close()

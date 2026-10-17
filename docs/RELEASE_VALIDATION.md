@@ -18,7 +18,7 @@ Date: 2026-10-17. Source-only review candidate; forwarding remains OFF. The repo
 | Live sending | Zero SMS/WeChat sends during publication; no phone reconfiguration or live acceptance rerun |
 | Source license | MIT approved by owner; dependencies remain separately licensed |
 
-The earlier deployment's Windows 11 Pro build 26100 / WeChat 4.1.15.13 / Android 16 live results establish only that deployment's compatibility. Publication-specific changes include isolated paths, sanitized test fixtures and stricter ambiguity refusal. These changes passed automated validation but have not received a new live WeChat acceptance run. Never describe mocks or a Send-key return as independent recipient receipt.
+The earlier deployment's Windows 11 Pro build 26100 / WeChat 4.1.15.13 / Android 16 live results establish only that deployment's compatibility. Publication-specific changes include isolated paths, data-directory-scoped tray singleton, sanitized test fixtures, Paddle-based CLI inspection and stricter ambiguity refusal. These changes passed automated validation but have not received a new live WeChat acceptance run. Never describe mocks or a Send-key return as independent recipient receipt.
 
 The privacy scan checks publication source, the Git index, reachable history, and the source ZIP. It searches known private identifiers, realistic mobile-number patterns, personal Windows paths, tokens, DPAPI blobs and forbidden artifacts. It does not prove absence of every possible secret; manual file-list/source review remains part of release preparation. GitHub Actions status and the final artifact digest are reported with the repository handoff, avoiding a self-referential commit hash in this file.
 

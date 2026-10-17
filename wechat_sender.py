@@ -742,7 +742,7 @@ def main():
     elif args.inspect:
         d = NativeDesktop()
         d.activate()
-        ocr = WindowsOCR()
+        ocr = PaddleLocalOCR()
         crop = d.capture().crop((round(70*d.scale),round(35*d.scale),round(230*d.scale),round(72*d.scale)))
         tokens = ocr.read(crop)
         print(json.dumps({"version":d.version,"width":d.width,"height":d.height,"scale":d.scale,
