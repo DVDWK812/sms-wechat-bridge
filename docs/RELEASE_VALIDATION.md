@@ -1,6 +1,6 @@
 # Publication-copy validation / 发布副本验证
 
-Date: 2026-10-17. Source-only review candidate; forwarding remains OFF. The repository must remain Private until the owner approves public release.
+Date: 2026-10-17. Source-only review candidate; forwarding remains OFF. At the time of this 2026-10-17 validation, the repository was Private. Its owner subsequently requested a public release; actual GitHub visibility must be checked separately.
 
 | Check | Result and scope |
 |---|---|

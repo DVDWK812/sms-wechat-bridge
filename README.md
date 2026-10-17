@@ -32,6 +32,25 @@ flowchart LR
 
 微信必须已登录且保持可交互桌面。Windows 锁屏、休眠、注销、RDP 会话变化、用户操作抢占焦点或微信更新都可能使发送停止。版本不匹配默认拒绝，不自动降级。当前目标名不支持空白字符。
 
+## 必需软件与官方下载链接
+
+本仓库是 **Windows 端 Python 源码**，不内置第三方安装包。下表列出运行整个流程所需的软件；请仅从相应官方渠道下载。
+
+| 设备 | 软件 | 官方下载链接 | 作用和注意事项 |
+|---|---|---|---|
+| **安卓手机（收短信）** | **SmsForwarder** | [官方 GitHub Releases](https://github.com/pppscn/SmsForwarder/releases) | 必需。安装 APK，开启短信转发规则和 Webhook；允许短信、通知、后台运行/自启动权限。Android 16 有原部署测试记录，但上游公开适配说明主要覆盖 Android 4.4–13，其他版本需实机验证。 |
+| **安卓手机（收短信）** | **Tailscale for Android** | [官方下载](https://tailscale.com/download/android) · [安装说明](https://tailscale.com/docs/install/android) | 必需。登录并加入与 Windows 相同的 tailnet，允许 VPN 和后台运行。 |
+| **Windows 电脑** | **微信 Windows 客户端（WeChat/微信）** | [腾讯 PC 下载入口](https://pc.weixin.qq.com/) · [Microsoft Store](https://apps.microsoft.com/detail/xpfckbrnfzq62g) | 必需。登录微信并保持可交互桌面。**仅实测 4.1.15.13**；官方最新下载版本不保证兼容，程序不会自动降级。 |
+| **Windows 电脑** | **Python 3.12（64 位）** | [Python 3.12.10 官方 Windows 安装页](https://www.python.org/downloads/release/python-31210/) | 必需。安装 x64 版并确保 `py -3.12` 可用；本项目依赖以 Python 3.12 为基准测试，不建议直接换 3.13/3.14。 |
+| **Windows 电脑** | **Tailscale for Windows** | [官方下载](https://tailscale.com/download/windows) · [安装说明](https://tailscale.com/docs/install/windows) | 必需。加入同一 tailnet；只允许手机的 Tailscale IP 访问受限 Webhook 端口。 |
+| **可用于登录微信的手机** | 微信移动端 | [微信官方入口](https://weixin.qq.com/) · [Google Play](https://play.google.com/store/apps/details?id=com.tencent.mm) | 仅在 Windows 微信要求手机扫码/确认登录时需要；不要求与接收短信的安卓机是同一台。 |
+
+**由安装命令自动获取，无需手动下载安装包：** Python 的 `pywin32`、`psutil`、`Pillow`、`numpy`、`PaddleOCR`、`PaddlePaddle`、`PaddleX` 及其依赖，见 `requirements/`。OCR 权重单独通过 `prepare_paddle_models.py` 从 [PaddleOCR 官方项目](https://github.com/PaddlePaddle/PaddleOCR)获取；本仓库不附带模型文件。
+
+**系统自带：** Windows PowerShell、任务计划程序及 Windows Defender 防火墙。**不要求：** Root、ADB、长期 USB 连接、Codex、VS Code 或 Git（使用源码 ZIP 时）。Git / VS Code 仅为可选开发工具，可从 [Git 官网](https://git-scm.com/downloads/win) / [VS Code 官网](https://code.visualstudio.com/download) 安装。
+
+如官方下载入口因地区限制不可访问，请使用对应厂商认可的渠道，不要下载来源不明的微信、SmsForwarder 或 Python 安装包。
+
 ## 安装
 
 1. 安装官方 Python 3.12 x64、微信、Windows 和 Android Tailscale。两端加入同一 tailnet，手动完成登录和 VPN 授权。
@@ -127,4 +146,4 @@ Windows 防火墙仅允许手机 Tailscale IP 到本机指定 Tailscale IP/端�
 
 参阅 [SECURITY.md](SECURITY.md)。此仓库不含个人配置、Secret、电话号码、tailnet 地址、聊天记录、截图、日志、数据库、模型、APK 或虚拟环境。测试号码与网络地址均为虚构夹具，禁止当成部署配置。
 
-自有代码经权利人确认采用 [MIT License](LICENSE)。第三方依赖和外部应用继续遵循各自许可及服务条款。仓库保持 Private，公开前请完成项目审核。
+自有代码经权利人确认采用 [MIT License](LICENSE)。第三方依赖和外部应用继续遵循各自许可及服务条款。公开发布不意味着不存在安全风险。请在部署时自行审核配置、短信来源及目标身份；账户名和 Git 提交元数据会随公开仓库显示。

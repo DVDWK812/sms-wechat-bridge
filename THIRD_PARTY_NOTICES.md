@@ -33,4 +33,4 @@ In particular, the installed `python-bidi` package reports LGPL licensing, and `
 
 ## Own-code licensing status
 
-The owner explicitly confirmed ownership/permission and approved MIT for original project code on 2026-10-17. See `LICENSE`. This grant excludes third-party dependencies, applications and models. The repository remains private pending final public-release review.
+The owner explicitly confirmed ownership/permission and approved MIT for original project code on 2026-10-17. See `LICENSE`. This grant excludes third-party dependencies, applications and models. Public visibility does not extend the project's MIT grant to third-party applications, native libraries, transitive dependencies or model weights.

@@ -30,6 +30,25 @@ The original deployment was tested with **Windows 11 Pro build 26100**, **Python
 
 WeChat GUI automation requires a logged-in, interactive desktop. Locking, sleep, logoff, RDP changes, focus changes or WeChat updates can stop it. Names containing whitespace are currently unsupported. Give every configured target a unique full remark/group name.
 
+## Required software and official downloads
+
+This repository distributes **Windows Python source code only**, not third-party installers. Install the following software using official sources:
+
+| Device | Software | Official download | Purpose and compatibility |
+|---|---|---|---|
+| **Android SMS phone** | **SmsForwarder** | [GitHub Releases](https://github.com/pppscn/SmsForwarder/releases) | Required. Set up the SMS rule and Webhook; grant SMS, notification, autostart and background permissions. An earlier deployment worked on Android 16, while upstream's published compatibility scope primarily covers Android 4.4–13; verify your own device. |
+| **Android SMS phone** | **Tailscale for Android** | [Download](https://tailscale.com/download/android) · [Guide](https://tailscale.com/docs/install/android) | Required. Connect to the same tailnet as Windows; allow the Android VPN and background connection. |
+| **Windows PC** | **WeChat for Windows** | [Tencent PC download portal](https://pc.weixin.qq.com/) · [Microsoft Store](https://apps.microsoft.com/detail/xpfckbrnfzq62g) | Required. Stay signed in on an interactive desktop. **Only version 4.1.15.13 was live-tested**; newer official releases may not work, and the application does not downgrade WeChat. |
+| **Windows PC** | **Python 3.12 (64-bit)** | [Official Python 3.12.10 Windows download](https://www.python.org/downloads/release/python-31210/) | Required. Install x64 and ensure `py -3.12` works. Dependencies were tested with Python 3.12, not automatically with 3.13/3.14. |
+| **Windows PC** | **Tailscale for Windows** | [Download](https://tailscale.com/download/windows) · [Guide](https://tailscale.com/docs/install/windows) | Required. Join the same tailnet; restrict inbound Webhook access to the phone's Tailscale IP. |
+| **Phone used to sign in to WeChat** | WeChat mobile app | [Official site](https://weixin.qq.com/) · [Google Play](https://play.google.com/store/apps/details?id=com.tencent.mm) | Needed if Windows login requires mobile QR/approval; it need not run on the Android phone receiving SMS. |
+
+**Installed automatically by the commands below (no separate installers):** `pywin32`, `psutil`, `Pillow`, `numpy`, `PaddleOCR`, `PaddlePaddle`, `PaddleX` and their transitive dependencies. The separate `prepare_paddle_models.py` command obtains OCR weights from the [official PaddleOCR project](https://github.com/PaddlePaddle/PaddleOCR); no weights are bundled.
+
+**Built into Windows:** PowerShell, Task Scheduler and Windows Defender Firewall. **Not required:** root access, ADB, permanent USB connection, Codex, VS Code or Git when using the source ZIP. For development, [Git for Windows](https://git-scm.com/downloads/win) and [VS Code](https://code.visualstudio.com/download) are optional.
+
+If an official download is unavailable in your region, use a vendor-approved channel rather than an untrusted mirror.
+
 ## Install
 
 Install official Python 3.12 x64, WeChat and Tailscale on Windows; install Tailscale and [SmsForwarder](https://github.com/pppscn/SmsForwarder) on Android. Log both devices into the same tailnet and approve phone permissions manually. No root is required.
@@ -110,4 +129,4 @@ Root modules preserve the validated flow: `bridge.py` handles authentication/que
 
 Read [SECURITY.md](SECURITY.md) and [third-party notices](THIRD_PARTY_NOTICES.md). No personal configuration, credentials, SMS, chat screenshots, logs, databases, models, APKs or environments belong in this repository. Test addresses/numbers are synthetic fixtures.
 
-Original project code is available under the [MIT License](LICENSE), with explicit rights-holder approval. Third-party dependencies and external applications retain their own licenses and terms. The repository remains private pending publication review.
+Original project code is available under the [MIT License](LICENSE), with explicit rights-holder approval. Third-party dependencies and external applications retain their own licenses and terms. Public availability does not guarantee the absence of security risks. Review your own configuration, SMS source and target identity; repository ownership and Git commit metadata become visible when published.
