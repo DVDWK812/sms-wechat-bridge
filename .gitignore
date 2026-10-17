@@ -1,0 +1,46 @@
+# Local configuration and credentials
+config.json
+config.local.*
+.env
+.env.*
+!.env.example
+tray-root.json
+*Secret*
+*secret*
+*token*
+# Runtimes and generated state
+.venv*/
+venv/
+.local/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.log
+*.sqlite*
+*.db
+*.tmp
+*.bak
+backup*/
+downloads/
+tools/
+dist/
+build/
+*.egg-info/
+# Private UI evidence and third party binaries/models
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.lnk
+*.exe
+*.dll
+*.apk
+*.zip
+paddle-models*/
+*.pdparams
+*.pdiparams
+*.safetensors
+*EVIDENCE*
+*PROBE*
+*STATUS*
+*fingerprint*

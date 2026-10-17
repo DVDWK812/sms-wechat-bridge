@@ -1,0 +1,15 @@
+{
+  "SMS_ALLOWED_SENDERS": "",
+  "SMS_ALLOW_ALL_SENDERS": "0",
+  "SMS_FILTER_MODE": "contains",
+  "SMS_FILTER_KEYWORD": "验证码",
+  "WECHAT_TARGET": "",
+  "WECHAT_TARGET_TYPE": "chat",
+  "WECHAT_TARGET_VERIFIED": "0",
+  "SMS_REAL_SEND_APPROVED": "0",
+  "SMS_DRY_RUN": "1",
+  "SMS_BIND": "",
+  "SMS_ALLOWED_CLIENT_IPS": "",
+  "SMS_PORT": "8765",
+  "AcceptanceComplete": false
+}

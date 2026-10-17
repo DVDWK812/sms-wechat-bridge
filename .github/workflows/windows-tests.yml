@@ -1,0 +1,44 @@
+name: Windows isolated tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    env:
+      SMS_DRY_RUN: '1'
+      SMS_REAL_SEND_APPROVED: '0'
+      WECHAT_TARGET_VERIFIED: '0'
+      SMS_WECHAT_DATA_DIR: '${{ runner.temp }}\sms-wechat-oss-ci'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+          architecture: x64
+      - name: Create isolated runtimes (no models)
+        shell: pwsh
+        run: |
+          python -m venv .venv
+          python -m venv .venv-wechat
+          .\.venv\Scripts\python.exe -m pip install -r requirements/receiver.txt
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Unit tests (GUI mocked, no credentials)
+        shell: pwsh
+        run: |
+          .\.venv\Scripts\python.exe -m unittest discover -s tests -v
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Native Job and HTTP integration (loopback, sender mocked)
+        shell: pwsh
+        run: |
+          .\.venv\Scripts\python.exe tests/native_acceptance.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Scan tracked files and reachable history
+        shell: pwsh
+        run: |
+          .\.venv\Scripts\python.exe scripts/scan_release.py --history
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
